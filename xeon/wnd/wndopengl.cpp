@@ -38,7 +38,7 @@ void WND::CreateContext ( void ) {
 		exit ( 0 ) ;
 	}
 	else {
-		printf ( "OPENGL::VERSIONS::%d-%d\n" , GLVersion.major , GLVersion.minor ) ;
+		printf ( "OPENGL::VERSIONS::%d.%d\n" , GLVersion.major , GLVersion.minor ) ;
 	}
 
 	glEnable ( GL_BLEND );

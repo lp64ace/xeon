@@ -3,6 +3,8 @@
 #include "./wnd/wnd.h"
 #include "./wnd/wndlist.h"
 
+#include <glad/glad.h>
+
 class Window : public WND {
 	RECT rect ;
 public:
@@ -10,7 +12,7 @@ public:
 		switch ( message ) {
 			case WM_SIZE: {
 				GetClientRect ( hwnd , &rect ) ;
-				// glViewport ( 0 , 0 , rect.right - rect.left , rect.bottom - rect.top ) ;
+				glViewport ( 0 , 0 , rect.right - rect.left , rect.bottom - rect.top ) ;
 			}break;
 		}
 		return  DefWindowProc ( hwnd , message , wParam , lParam ) ;
@@ -21,7 +23,7 @@ int main ( void ) {
 	init_api ( ) ;
 	
 	wnd = new Window ( ) ;
-	wnd->Create ( NULL , ( const TCHAR * ) L"Xeon" , box ( CW_USEDEFAULT , CW_USEDEFAULT , 512 , 512 ) ) ;
+	wnd->Create ( NULL , ( const TCHAR * ) L"Xeon" , box ( CW_USEDEFAULT , CW_USEDEFAULT , 1024 , 1024 ) ) ;
 	wnd->Show ( ) ;
 
 	wnd->CreateContext ( ) ;

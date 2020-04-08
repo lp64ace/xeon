@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 #include <windows.h>
 #include <vector>
 #include <cstring>
@@ -40,6 +42,8 @@ public:
 	void DisableMovement ( ) { locked = true ; }
 	void EnableMovement ( ) { locked = false; }
 
+	void CreateContext ( ) ;
+
 	WND *FindChildren ( const wchar_t *name ) ;
 	WND *FindChildren ( HWND child ) ;
 
@@ -49,6 +53,7 @@ public:
 
 class Application {
 	HINSTANCE hThisInstance , hPrev;
+	std::chrono::system_clock::time_point start ;
 public:
 	HFONT font ;
 	std::vector<WNDCLASSEX> wincl;
@@ -57,6 +62,8 @@ public:
 	HINSTANCE Instance ( ) const { return hThisInstance ; }
 	const WNDCLASSEX *getWndClass ( int wcid ) const { return ( wincl.size ( ) > wcid ) ? &wincl [ wcid ] : NULL ; }
 	std::vector<WND *> w ;
+
+	float time ( ) ;
 };
 
 WNDCLASSEX simpleWinClass ( HINSTANCE hThisInstance , HINSTANCE hPrev , const wchar_t *name , int icon_define , int small_define , COLORREF background ) ;

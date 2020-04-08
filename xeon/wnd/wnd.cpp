@@ -4,11 +4,16 @@ Application *APP = NULL;
 
 static wchar_t className [ ] = L"Xeon::Window::Class" ;
 
+float Application::time ( ) {
+	return std::chrono::duration<float> ( std::chrono::system_clock::now ( ) - APP->start ).count ( ) ;
+}
+
 WND::WND ( ) {
 	assert ( APP );
 	APP->w.push_back ( this );
 	inited = false;
 	hwnd = NULL;
+	hdc = NULL ;
 }
 
 LRESULT CALLBACK WindowProcedure ( HWND hWnd , UINT message , WPARAM wParam , LPARAM lParam );
@@ -17,7 +22,7 @@ LRESULT WND::Dispatch ( UINT message , WPARAM wParam , LPARAM lParam ) {
 	if ( !inited ) {
 		inited = true;
 		Start ( );
-		hdc = GetDC ( hwnd );
+		if ( !hdc ) hdc = GetDC ( hwnd );
 	}
 
 	switch ( message ) {
@@ -177,6 +182,7 @@ Application::Application ( HINSTANCE hThisInstance , HINSTANCE hPrev , COLORREF 
 	this->hThisInstance = hThisInstance;
 	this->hPrev = hPrev;
 	wincl.push_back ( simpleWinClass ( hThisInstance , hPrev , className , NULL , NULL , background ) );
+	start = std::chrono::system_clock::now ( ) ;
 }
 
 void init_api ( ) {

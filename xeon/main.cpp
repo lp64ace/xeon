@@ -1,7 +1,5 @@
 #include <iostream>
 
-int main()
-{
-	std::cout << "Hello, World\n";
+int main ( void ) {
 	return 0;
 }

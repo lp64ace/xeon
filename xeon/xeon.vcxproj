@@ -46,11 +46,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</IntDir>
+    <IncludePath>$(SolutionDir)libraries\glad\include;$(SolutionDir)libraries\glm\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</IntDir>
+    <IncludePath>$(SolutionDir)libraries\glad\include;$(SolutionDir)libraries\glm\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -83,6 +85,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="glad.c" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

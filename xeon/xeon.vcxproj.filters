@@ -16,6 +16,12 @@
     <Filter Include="mesh">
       <UniqueIdentifier>{b549dd4f-5621-4044-8300-a3f2df888a91}</UniqueIdentifier>
     </Filter>
+    <Filter Include="wnd">
+      <UniqueIdentifier>{0f8a8b09-24ac-414d-8159-adfc3a2f53e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="wnd\box">
+      <UniqueIdentifier>{a5e73229-da3f-46b3-9694-5f41e02df6c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -30,6 +36,21 @@
     <ClCompile Include="math\math_func.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="mesh\mesh_data.cpp">
+      <Filter>mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wnd.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\box.cpp">
+      <Filter>wnd\box</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\utils.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wndcreation.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\math.h">
@@ -37,6 +58,15 @@
     </ClInclude>
     <ClInclude Include="mesh\mesh_data.h">
       <Filter>mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="wnd\wnd.h">
+      <Filter>wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="wnd\wndlist.h">
+      <Filter>wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="wnd\box.h">
+      <Filter>wnd\box</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

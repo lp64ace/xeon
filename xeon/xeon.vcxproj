@@ -65,7 +65,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>User32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -83,7 +83,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>User32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>User32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -96,6 +96,7 @@
     <ClCompile Include="wnd\utils.cpp" />
     <ClCompile Include="wnd\wnd.cpp" />
     <ClCompile Include="wnd\wndcreation.cpp" />
+    <ClCompile Include="wnd\wndopengl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\math.h" />

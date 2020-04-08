@@ -51,6 +51,9 @@
     <ClCompile Include="wnd\wndcreation.cpp">
       <Filter>wnd</Filter>
     </ClCompile>
+    <ClCompile Include="wnd\wndopengl.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\math.h">

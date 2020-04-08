@@ -24,6 +24,8 @@ int main ( void ) {
 	wnd->Create ( NULL , ( const TCHAR * ) L"Xeon" , box ( CW_USEDEFAULT , CW_USEDEFAULT , 512 , 512 ) ) ;
 	wnd->Show ( ) ;
 
+	wnd->CreateContext ( ) ;
+
 	MSG messages;
 
 	while ( TRUE ) {

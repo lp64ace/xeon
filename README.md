@@ -1,2 +1,2 @@
 # xeon
-A raytracing renderer
+A raytracing renderer using OpenGL and CUDA with c++

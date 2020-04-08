@@ -2,7 +2,19 @@
 
 Application *APP = NULL;
 
+#define FPS_UNCAPPED				100000.0f
+
 static wchar_t className [ ] = L"Xeon::Window::Class" ;
+
+Callbacks callbackfuncs ;
+
+void SetKeyCallbackFunc ( void ( *func ) ( int key , KeyState state ) ) {
+	callbackfuncs.key = func ;
+}
+
+void DelKeyCallbackFunc ( void ) {
+	SetKeyCallbackFunc ( 0 ) ;
+}
 
 float Application::time ( ) {
 	return std::chrono::duration<float> ( std::chrono::system_clock::now ( ) - APP->start ).count ( ) ;
@@ -127,10 +139,19 @@ LRESULT CALLBACK WindowProcedure ( HWND hwnd , UINT message , WPARAM wParam , LP
 					APP->font = cfont ( receiver , 8 );
 					if ( !receiver->locked )
 						receiver->position = GetWindowBox ( hwnd ) ;
+					if ( receiver == activeOpenGLContext->window ) {
+						glViewport ( 0 , 0 , receiver->position.right - receiver->position.left , receiver->position.bottom - receiver->position.top ) ;
+					}
 				}break;
 				case WM_MOVE: {
 					if ( !receiver->locked )
 						receiver->position = GetWindowBox ( hwnd );
+				}break;
+				case WM_KEYDOWN: {
+					if ( callbackfuncs.key ) callbackfuncs.key ( wParam , KeyState::KEY_PRESSED ) ;
+				}break;
+				case WM_KEYUP: {
+					if ( callbackfuncs.key ) callbackfuncs.key ( wParam , KeyState::KEY_RELEASED ) ;
 				}break;
 				case WM_LBUTTONDOWN: {
 					HWND focus = GetWindow ( hwnd , GW_CHILD );
@@ -183,6 +204,46 @@ Application::Application ( HINSTANCE hThisInstance , HINSTANCE hPrev , COLORREF 
 	this->hPrev = hPrev;
 	wincl.push_back ( simpleWinClass ( hThisInstance , hPrev , className , NULL , NULL , background ) );
 	start = std::chrono::system_clock::now ( ) ;
+	fpsCap = FPS_UNCAPPED ;
+}
+
+bool Application::PollWindowsEvents ( ) {
+	static MSG messages;
+
+	float now ;
+
+	do {
+
+		while ( PeekMessage ( &messages , NULL , 0 , 0 , PM_REMOVE ) ) {
+			TranslateMessage ( &messages );
+			DispatchMessage ( &messages );
+		}
+		if ( messages.message == WM_QUIT ) {
+			return false ;
+		}
+
+		now = time ( ) ;
+
+	} while ( ( now - lastTime ) < ( 1.0 / fpsCap ) ) ;
+	
+	deltaTime = now - lastTime ;
+	lastTime = now ;
+
+	fpsCap = FPS_UNCAPPED ;
+
+	return true ;
+}
+
+void Application::setFpsCap ( float cap ) {
+	fpsCap = cap ;
+}
+
+float Application::getDeltaTime ( ) const {
+	return deltaTime ;
+}
+
+void Application::appSwapBuffers ( void ) {
+	SwapBuffers ( activeOpenGLContext->windowContext ) ;
 }
 
 void init_api ( ) {

@@ -2,6 +2,14 @@
 
 #include <glad/glad.h>
 
+Context *activeOpenGLContext = NULL ;
+
+Context::Context ( ) : windowContext ( NULL ) , openglContext ( NULL ) , window ( NULL ) {
+}
+
+Context::Context ( HDC hdc , HGLRC hglrc , WND *wnd ) : windowContext ( hdc ) , openglContext ( hglrc ) , window ( wnd ) {
+}
+
 void WND::CreateContext ( void ) {
 	PIXELFORMATDESCRIPTOR pfd =
 	{
@@ -23,15 +31,13 @@ void WND::CreateContext ( void ) {
 		0, 0, 0
 	};
 
-	if ( !hdc ) hdc = GetDC ( hwnd ) ;
-	HDC ourWindowHandleToDeviceContext = hdc ;
-
 	int  letWindowsChooseThisPixelFormat;
-	letWindowsChooseThisPixelFormat = ChoosePixelFormat ( ourWindowHandleToDeviceContext , &pfd );
-	SetPixelFormat ( ourWindowHandleToDeviceContext , letWindowsChooseThisPixelFormat , &pfd );
+	letWindowsChooseThisPixelFormat = ChoosePixelFormat ( hdc , &pfd );
+	SetPixelFormat ( hdc , letWindowsChooseThisPixelFormat , &pfd );
 
-	HGLRC ourOpenGLRenderingContext = wglCreateContext ( ourWindowHandleToDeviceContext );
-	wglMakeCurrent ( ourWindowHandleToDeviceContext , ourOpenGLRenderingContext );
+	hglrc = wglCreateContext ( hdc );
+
+	MakeCurrentContext ( new Context ( hdc , hglrc , this ) ) ;
 
 	if ( !gladLoadGL ( ) ) {
 		printf ( "WND::ERROR_CREATING_OPENGL_CONTEXT::GLAD_LOAD_GL FAILED!\n" ) ;
@@ -44,4 +50,17 @@ void WND::CreateContext ( void ) {
 	glEnable ( GL_BLEND );
 	glBlendFunc ( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA );
 	glBlendFuncSeparate ( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA , GL_ONE , GL_ZERO );
+}
+
+void MakeCurrentContext ( Context *context ) {
+	activeOpenGLContext = context ;
+	wglMakeCurrent ( context->windowContext , context->openglContext );
+}
+
+Context *GetCurrentContext ( void ) {
+	return activeOpenGLContext ;
+}
+
+HDC WND::GetContext ( ) {
+	return hdc ;
 }

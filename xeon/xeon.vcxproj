@@ -91,6 +91,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math\math_func.cpp" />
     <ClCompile Include="math\math_structs.cpp" />
+    <ClCompile Include="math\transform.cpp" />
     <ClCompile Include="mesh\mesh_data.cpp" />
     <ClCompile Include="wnd\box.cpp" />
     <ClCompile Include="wnd\utils.cpp" />
@@ -100,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\math.h" />
+    <ClInclude Include="math\transform.h" />
     <ClInclude Include="mesh\mesh_data.h" />
     <ClInclude Include="wnd\box.h" />
     <ClInclude Include="wnd\wnd.h" />

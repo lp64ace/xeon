@@ -10,6 +10,8 @@
 
 #include "box.h"
 
+#include <glad/glad.h>
+
 class Application;
 class WND;
 
@@ -17,11 +19,39 @@ extern Application *APP;
 
 void init_api ( ) ;
 
+struct Context {
+	Context ( ) ;
+	Context ( HDC , HGLRC , WND * ) ;
+
+	HDC windowContext ;
+	HGLRC openglContext ;
+
+	WND *window ;
+};
+
+extern Context *activeOpenGLContext ;
+
+void MakeCurrentContext ( Context *context ) ;
+Context *GetCurrentContext ( void ) ;
+
+enum KeyState {
+	KEY_PRESSED ,
+	KEY_RELEASED
+};
+
+struct Callbacks {
+	void ( *key ) ( int key , KeyState state ) = 0 ;
+};
+
+void SetKeyCallbackFunc ( void ( *func ) ( int key , KeyState state ) ) ;
+
 class WND {
 	bool inited ;
 protected:
 	WND *daddy;
 	virtual void Start ( ) { }
+
+	HGLRC hglrc ;
 public:
 	HWND hwnd ;
 	HDC hdc ;
@@ -43,6 +73,7 @@ public:
 	void EnableMovement ( ) { locked = false; }
 
 	void CreateContext ( ) ;
+	HDC GetContext ( ) ;
 
 	WND *FindChildren ( const wchar_t *name ) ;
 	WND *FindChildren ( HWND child ) ;
@@ -54,16 +85,31 @@ public:
 class Application {
 	HINSTANCE hThisInstance , hPrev;
 	std::chrono::system_clock::time_point start ;
+	std::vector<WNDCLASSEX> wincl;
+
+	float lastTime ;
+	float fpsCap ;
+	float deltaTime ;
 public:
 	HFONT font ;
-	std::vector<WNDCLASSEX> wincl;
-	Application ( HINSTANCE hThisInstance , HINSTANCE hPrev , COLORREF background ) ;
-	int addWndClass ( const WNDCLASSEX &wndcl ) { wincl.push_back ( wndcl ) ; }
-	HINSTANCE Instance ( ) const { return hThisInstance ; }
+
+	Application ( HINSTANCE hThisInstance , HINSTANCE hPrev , COLORREF background ) ;	
+	
+	HINSTANCE Instance ( ) const { return hThisInstance ; }	
+
 	const WNDCLASSEX *getWndClass ( int wcid ) const { return ( wincl.size ( ) > wcid ) ? &wincl [ wcid ] : NULL ; }
+
+	int addWndClass ( const WNDCLASSEX &wndcl ) { wincl.push_back ( wndcl ) ; }
+	
 	std::vector<WND *> w ;
 
 	float time ( ) ;
+
+	bool PollWindowsEvents ( ) ;
+	void appSwapBuffers ( ) ;
+
+	float getDeltaTime ( ) const ;
+	void setFpsCap ( float cap ) ;
 };
 
 WNDCLASSEX simpleWinClass ( HINSTANCE hThisInstance , HINSTANCE hPrev , const wchar_t *name , int icon_define , int small_define , COLORREF background ) ;

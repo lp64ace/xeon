@@ -54,6 +54,9 @@
     <ClCompile Include="wnd\wndopengl.cpp">
       <Filter>wnd</Filter>
     </ClCompile>
+    <ClCompile Include="math\transform.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="math\math.h">
@@ -70,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="wnd\box.h">
       <Filter>wnd\box</Filter>
+    </ClInclude>
+    <ClInclude Include="math\transform.h">
+      <Filter>math</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

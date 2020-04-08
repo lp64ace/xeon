@@ -12,12 +12,5 @@ struct Ray {
 	glm::vec3 dir ;
 };
 
-struct Face {
-	Vert vert [ 3 ] ;
-	glm::vec3 N ;
-
-	glm::vec3 genFlatNormal ( ) ;
-};
-
 // https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/ray-triangle-intersection-geometric-solution
 bool rayTriangleIntersect ( const Ray &ray , const Face &v , float &t ) ;

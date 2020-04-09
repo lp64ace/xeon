@@ -12,28 +12,33 @@ WND *wnd;
 const int SCREEN_WIDTH = 500;
 const int SCREEN_HEIGHT = 480;
 
+int thread_count = 8 ;
+int finished = 0 ;
+
 void calculate_frame ( Texture& fb , Camera cam , ShapeList& world , int offset , int step ) {
 	for ( int j = (SCREEN_HEIGHT-1)-offset; j >=0; j-=step ) {
 		for ( int i = 0; i < SCREEN_WIDTH; i++ ) {
 			glm::vec3 col ( 0.0f );
 
-			for ( int s = 0; s < 32; s++ ) {
+			int samples = 150 ;
+			for ( int s = 0; s < samples; s++ ) {
 				float u = ( i + drand48 ( ) ) / ( float ) SCREEN_WIDTH;
 				float v = ( j + drand48 ( ) ) / ( float ) SCREEN_HEIGHT;
 
 				Ray ray = cam.get_ray ( u , v );
 
 				glm::vec3 p = ray.point_at ( 2.0 );
-				col += color ( ray , world );
+				col += color ( ray , world ,8);
 			}
 
-			col /= 100.0f;
+			col /= samples;
 			col = glm::vec3 ( glm::sqrt ( col.x ) , glm::sqrt ( col.y ) , glm::sqrt ( col.z ) );
 			glm::ivec3 value = col * 255.99f;
 			glm::u8vec4 final_color = glm::u8vec4 ( value.r , value.g , value.b , 255.0f );
 			fb.write_pixel ( i , j , final_color );
 		}
 	}
+	finished++;
 }
 
 int main ( )
@@ -87,11 +92,11 @@ int main ( )
 	float aspect = float ( SCREEN_WIDTH ) / SCREEN_HEIGHT ;
 	Camera cam ( glm::vec3 ( 0.0f ) , glm::vec3 ( -aspect , -1.0f , -1.0f ) );
 
-	int thread_count = 8 ;
-
 	for ( int i = 0 ; i < thread_count ; i++ ) {
 		new std::thread ( calculate_frame , std::ref ( fb ) , cam , std::ref ( world ) , i , thread_count ) ;
 	}
+
+	float start_time = APP->time ( ) ;
 
 	while (APP->PollWindowsEvents()) {
 
@@ -106,5 +111,11 @@ int main ( )
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		
 		APP->appSwapBuffers();
+
+		if ( thread_count == finished ) {
+			printf ( "time elapsed : %.3fs\n" , APP->time ( ) - start_time ) ;
+			getchar ( );
+			break;
+		}
 	}
 }

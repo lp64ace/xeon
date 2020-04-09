@@ -2,13 +2,15 @@
 #include <climits>
 #include <glm/gtx/compatibility.hpp>
 
-glm::vec3 color(const Ray& r, ShapeList& world)
-{
+glm::vec3 color(const Ray& r, ShapeList& world,int maxbounces) {
 	HitDesc desc;
 
-	if (world.cast_ray(r, 0.001, FLT_MAX, desc)) {
+	if (maxbounces > 0 && world.cast_ray(r, 0.001f, FLT_MAX, desc)) {
+		glm::vec3 reflected = 0.5f * color ( Ray ( desc.p , glm::reflect ( r.direction , desc.normal ) ) , world , maxbounces / 2 ) ;
+
 		glm::vec3 target = desc.p + desc.normal + get_random_sphere_unit_point();
-		return 0.5f * color(Ray(desc.p, target - desc.p), world);
+		glm::vec3 rough = 0.5f * color ( Ray ( desc.p , target - desc.p ) , world , maxbounces / 2 ) ;
+		return glm::lerp ( rough , reflected , 0.01f ) ;
 	}
 	else {
 		auto unit_dir = glm::normalize(r.direction);

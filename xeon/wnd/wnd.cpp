@@ -161,18 +161,6 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 				}break;
 			}
 
-			return result;
-		}
-	}
-	return DefWindowProc(hwnd, message, wParam, lParam);
-}
-
-WNDCLASSEX simpleWinClass(HINSTANCE hThisInstance, HINSTANCE hPrev, const wchar_t *name, int ICON, int SMALL, COLORREF background) {
-	WNDCLASSEX result = { 0 };
-
-	HBRUSH hBrsh;
-
-	hBrsh = CreateSolidBrush(background);
 			return result ;
 		}
 	}

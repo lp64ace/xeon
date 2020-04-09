@@ -108,7 +108,6 @@
     <ClInclude Include="math\camera.h" />
     <ClInclude Include="math\hitable.h" />
     <ClInclude Include="math\math.h" />
-    <ClInclude Include="math\math.h" />
     <ClInclude Include="math\random.h" />
     <ClInclude Include="math\ray.h" />
     <ClInclude Include="shapes\shape.h" />

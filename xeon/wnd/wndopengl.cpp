@@ -2,18 +2,18 @@
 
 #include <glad/glad.h>
 
-Context *activeOpenGLContext = NULL ;
+Context *activeOpenGLContext = NULL;
 
-Context::Context ( ) : windowContext ( NULL ) , openglContext ( NULL ) , window ( NULL ) {
+Context::Context() : windowContext(NULL), openglContext(NULL), window(NULL) {
 }
 
-Context::Context ( HDC hdc , HGLRC hglrc , WND *wnd ) : windowContext ( hdc ) , openglContext ( hglrc ) , window ( wnd ) {
+Context::Context(HDC hdc, HGLRC hglrc, WND *wnd) : windowContext(hdc), openglContext(hglrc), window(wnd) {
 }
 
-void WND::CreateContext ( void ) {
+void WND::CreateContext(void) {
 	PIXELFORMATDESCRIPTOR pfd =
 	{
-		sizeof ( PIXELFORMATDESCRIPTOR ),
+		sizeof(PIXELFORMATDESCRIPTOR),
 		1,
 		PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    //Flags
 		PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
@@ -32,35 +32,35 @@ void WND::CreateContext ( void ) {
 	};
 
 	int  letWindowsChooseThisPixelFormat;
-	letWindowsChooseThisPixelFormat = ChoosePixelFormat ( hdc , &pfd );
-	SetPixelFormat ( hdc , letWindowsChooseThisPixelFormat , &pfd );
+	letWindowsChooseThisPixelFormat = ChoosePixelFormat(hdc, &pfd);
+	SetPixelFormat(hdc, letWindowsChooseThisPixelFormat, &pfd);
 
-	hglrc = wglCreateContext ( hdc );
+	hglrc = wglCreateContext(hdc);
 
-	MakeCurrentContext ( new Context ( hdc , hglrc , this ) ) ;
+	MakeCurrentContext(new Context(hdc, hglrc, this));
 
-	if ( !gladLoadGL ( ) ) {
-		printf ( "WND::ERROR_CREATING_OPENGL_CONTEXT::GLAD_LOAD_GL FAILED!\n" ) ;
-		exit ( 0 ) ;
+	if(!gladLoadGL()) {
+		printf("WND::ERROR_CREATING_OPENGL_CONTEXT::GLAD_LOAD_GL FAILED!\n");
+		exit(0);
 	}
 	else {
-		printf ( "OPENGL::VERSIONS::%d.%d\n" , GLVersion.major , GLVersion.minor ) ;
+		printf("OPENGL::VERSIONS::%d.%d\n", GLVersion.major, GLVersion.minor);
 	}
 
-	glEnable ( GL_BLEND );
-	glBlendFunc ( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA );
-	glBlendFuncSeparate ( GL_SRC_ALPHA , GL_ONE_MINUS_SRC_ALPHA , GL_ONE , GL_ZERO );
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
 }
 
-void MakeCurrentContext ( Context *context ) {
-	activeOpenGLContext = context ;
-	wglMakeCurrent ( context->windowContext , context->openglContext );
+void MakeCurrentContext(Context *context) {
+	activeOpenGLContext = context;
+	wglMakeCurrent(context->windowContext, context->openglContext);
 }
 
-Context *GetCurrentContext ( void ) {
-	return activeOpenGLContext ;
+Context *GetCurrentContext(void) {
+	return activeOpenGLContext;
 }
 
-HDC WND::GetContext ( ) {
-	return hdc ;
+HDC WND::GetContext() {
+	return hdc;
 }

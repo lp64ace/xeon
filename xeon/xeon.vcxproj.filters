@@ -30,11 +30,41 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="math\math_structs.cpp">
-      <Filter>math</Filter>
+    <ClCompile Include="wnd\wnd.cpp">
+      <Filter>wnd</Filter>
     </ClCompile>
-    <ClCompile Include="math\math_func.cpp">
-      <Filter>math</Filter>
+    <ClCompile Include="wnd\utils.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wndcreation.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wndopengl.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="math\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shapes\shape_list.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shapes\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gpu\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gpu\texture.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mesh\mesh_data.cpp">
       <Filter>mesh</Filter>
@@ -62,9 +92,6 @@
     <ClInclude Include="math\math.h">
       <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="mesh\mesh_data.h">
-      <Filter>mesh</Filter>
-    </ClInclude>
     <ClInclude Include="wnd\wnd.h">
       <Filter>wnd</Filter>
     </ClInclude>
@@ -74,8 +101,39 @@
     <ClInclude Include="wnd\box.h">
       <Filter>wnd\box</Filter>
     </ClInclude>
-    <ClInclude Include="math\transform.h">
+    <ClInclude Include="gpu\shader.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="math\camera.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\hitable.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\math.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\random.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\ray.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\shape.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\shape_list.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\sphere.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\texture.h">
+      <Filter>math</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\basic_vertex.vert" />
+    <None Include="shaders\basic_fragment.frag" />
   </ItemGroup>
 </Project>

@@ -46,13 +46,13 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)libraries\glad\include;$(SolutionDir)libraries\glm\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(SolutionDir)libraries\glad\include;$(SolutionDir)libraries\glm\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)binaries\$(Configuration)-$(Platform)\</IntDir>
-    <IncludePath>$(SolutionDir)libraries\glad\include;$(SolutionDir)libraries\glm\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir);$(SolutionDir)libraries\glad\include;$(SolutionDir)libraries\glm\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -88,24 +88,39 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="glad.c" />
+    <ClCompile Include="gpu\texture.cpp" />
+    <ClCompile Include="gpu\shader.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="math\math_func.cpp" />
-    <ClCompile Include="math\math_structs.cpp" />
-    <ClCompile Include="math\transform.cpp" />
-    <ClCompile Include="mesh\mesh_data.cpp" />
-    <ClCompile Include="wnd\box.cpp" />
+    <ClCompile Include="math\camera.cpp" />
+    <ClCompile Include="math\math.cpp" />
+    <ClCompile Include="math\random.cpp" />
+    <ClCompile Include="math\ray.cpp" />
+    <ClCompile Include="shapes\shape_list.cpp" />
+    <ClCompile Include="shapes\sphere.cpp" />
     <ClCompile Include="wnd\utils.cpp" />
     <ClCompile Include="wnd\wnd.cpp" />
     <ClCompile Include="wnd\wndcreation.cpp" />
     <ClCompile Include="wnd\wndopengl.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gpu\texture.h" />
+    <ClInclude Include="gpu\shader.h" />
+    <ClInclude Include="math\camera.h" />
+    <ClInclude Include="math\hitable.h" />
     <ClInclude Include="math\math.h" />
-    <ClInclude Include="math\transform.h" />
-    <ClInclude Include="mesh\mesh_data.h" />
+    <ClInclude Include="math\math.h" />
+    <ClInclude Include="math\random.h" />
+    <ClInclude Include="math\ray.h" />
+    <ClInclude Include="shapes\shape.h" />
+    <ClInclude Include="shapes\shape_list.h" />
+    <ClInclude Include="shapes\sphere.h" />
     <ClInclude Include="wnd\box.h" />
     <ClInclude Include="wnd\wnd.h" />
     <ClInclude Include="wnd\wndlist.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\basic_fragment.frag" />
+    <None Include="shaders\basic_vertex.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

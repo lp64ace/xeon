@@ -1,10 +1,12 @@
 #pragma once
 
-class box {
+class Box {
 public:
-	box ( ) ;
-	box ( int l , int t , int r , int b );
-	~box ( ) ;
-	int left , top , right , bottom ;
+	Box() = default;
+	Box(int l, int t, int r, int b) : 
+		left(l), top(t), right(r), bottom(b) {}
+	~Box() = default;
+	
+	int left, top, right, bottom;
 };
 

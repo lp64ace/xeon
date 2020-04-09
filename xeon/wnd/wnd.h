@@ -7,6 +7,7 @@
 #include <cassert>
 
 #include "box.h"
+
 #include <glad/glad.h>
 
 class Application;
@@ -110,3 +111,4 @@ public:
 };
 
 WNDCLASSEX simpleWinClass(HINSTANCE hThisInstance, HINSTANCE hPrev, const wchar_t *name, int icon_define, int small_define, COLORREF background);
+

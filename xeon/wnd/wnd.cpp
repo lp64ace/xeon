@@ -173,18 +173,32 @@ WNDCLASSEX simpleWinClass(HINSTANCE hThisInstance, HINSTANCE hPrev, const wchar_
 	HBRUSH hBrsh;
 
 	hBrsh = CreateSolidBrush(background);
+			return result ;
+		}
+	}
+	return DefWindowProc ( hwnd , message , wParam , lParam );
+}
+
+WNDCLASSEX simpleWinClass ( HINSTANCE hThisInstance , HINSTANCE hPrev , const wchar_t *name , int ICON , int SMALL , COLORREF background ) {
+	WNDCLASSEX result = { 0 } ;
+
+	HBRUSH hBrsh;
+
+	hBrsh = CreateSolidBrush ( background );
 
 	/* The Window structure */
 	result.hInstance = hThisInstance;
 	result.lpszClassName = name;
 	result.lpfnWndProc = WindowProcedure;
 	result.style = CS_HREDRAW | CS_VREDRAW;
+
 	result.cbSize = sizeof(WNDCLASSEX);
 
 	if(ICON) result.hIcon = LoadIcon(hThisInstance, MAKEINTRESOURCE(ICON));
 	if(SMALL) result.hIconSm = LoadIcon(hThisInstance, MAKEINTRESOURCE(SMALL));
 	result.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	result.lpszMenuName = NULL;
+  
 	result.cbClsExtra = 0;
 	result.cbWndExtra = 0;
 

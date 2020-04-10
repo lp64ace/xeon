@@ -2,10 +2,11 @@
 #include <glad/glad.h>
 #include <iostream>
 
-Texture::Texture(int width, int height) :
-    twidth(width), theight(height)
+Texture::Texture(int width, int height, bool allocate) :
+    twidth(width), theight(height), allocated(allocate)
 {
-    buffer = new uint8_t[width * height * 4];
+    if (allocated)
+        buffer = new uint8_t[width * height * 4];
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -15,12 +16,14 @@ Texture::Texture(int width, int height) :
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
 }
 
 Texture::~Texture()
 {
-    delete buffer;
+    if (allocated)
+        delete buffer;
+    
     glDeleteTextures(1, &texture);
 }
 

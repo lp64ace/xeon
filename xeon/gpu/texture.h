@@ -4,18 +4,19 @@
 
 class Texture {
 public:
-	Texture(int width, int height);
+	Texture(int width, int height, bool allocate = true);
 	~Texture();
 
 	void write_pixel(int x, int y, const glm::u8vec4& color);
-	uint8_t* get_buffer() { return buffer; }
 
 	void upload_to_gpu();
 	void unbind();
 	void bind();
 
-private:
+public:
 	int twidth, theight;
-	uint32_t texture, pbo;
+	uint32_t texture;
+
+	bool allocated;
 	uint8_t* buffer;
 };

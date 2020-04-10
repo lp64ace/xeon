@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="mesh">
+      <UniqueIdentifier>{b549dd4f-5621-4044-8300-a3f2df888a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="wnd">
+      <UniqueIdentifier>{0f8a8b09-24ac-414d-8159-adfc3a2f53e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="wnd\box">
+      <UniqueIdentifier>{a5e73229-da3f-46b3-9694-5f41e02df6c1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wnd.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\utils.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wndcreation.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wndopengl.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="math\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="math\ray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shapes\shape_list.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="shapes\sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gpu\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gpu\texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mesh\mesh_data.cpp">
+      <Filter>mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wnd.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\box.cpp">
+      <Filter>wnd\box</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\utils.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wndcreation.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="wnd\wndopengl.cpp">
+      <Filter>wnd</Filter>
+    </ClCompile>
+    <ClCompile Include="math\transform.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="math\math.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="wnd\wnd.h">
+      <Filter>wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="wnd\wndlist.h">
+      <Filter>wnd</Filter>
+    </ClInclude>
+    <ClInclude Include="wnd\box.h">
+      <Filter>wnd\box</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\shader.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\camera.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\hitable.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\math.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\random.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\ray.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\shape.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\shape_list.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="shapes\sphere.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="gpu\texture.h">
+      <Filter>math</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\basic_vertex.vert" />
+    <None Include="shaders\basic_fragment.frag" />
+  </ItemGroup>
+</Project>

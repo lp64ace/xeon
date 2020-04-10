@@ -5,9 +5,6 @@
 Texture::Texture(int width, int height, bool allocate) :
     twidth(width), theight(height), allocated(allocate)
 {
-    if (allocated)
-        buffer = new uint8_t[width * height * 4];
-
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     
@@ -21,9 +18,6 @@ Texture::Texture(int width, int height, bool allocate) :
 
 Texture::~Texture()
 {
-    if (allocated)
-        delete buffer;
-    
     glDeleteTextures(1, &texture);
 }
 

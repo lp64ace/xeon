@@ -7,6 +7,7 @@
 #include <cassert>
 
 #include "box.h"
+
 #include <glad/glad.h>
 
 class Application;
@@ -72,7 +73,7 @@ public:
 	void CreateContext();
 	HDC GetContext();
 
-	WND *FindChildren(const wchar_t *name);
+	WND *FindChildren(const char *name);
 	WND *FindChildren(HWND child);
 
 	void Update();
@@ -109,4 +110,5 @@ public:
 	void setFpsCap(float cap);
 };
 
-WNDCLASSEX simpleWinClass(HINSTANCE hThisInstance, HINSTANCE hPrev, const wchar_t *name, int icon_define, int small_define, COLORREF background);
+WNDCLASSEX simpleWinClass(HINSTANCE hThisInstance, HINSTANCE hPrev, const char *name, int icon_define, int small_define, COLORREF background);
+

@@ -4,7 +4,7 @@ Application *APP = NULL;
 
 #define FPS_UNCAPPED				100000.0f
 
-static wchar_t className [ ] = L"Xeon::Window::Class";
+static char className [ ] = "Xeon::Window::Class";
 
 Callbacks callbackfuncs;
 
@@ -79,11 +79,11 @@ WND::~WND() {
 	printf("Closed window %d APP windows left", APP->w.size());
 }
 
-WND *WND::FindChildren(const wchar_t *name) {
+WND *WND::FindChildren(const char *name) {
 	for(auto itr : children) {
-		wchar_t title [ 256 ];
+		char title [ 256 ];
 		GetWindowText(itr->hwnd, title, 256);
-		if(std::wstring(title) == name)
+		if(std::string(title) == name)
 			return itr;
 	}
 	return NULL;
@@ -161,30 +161,32 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT message, WPARAM wParam, LPARAM 
 				}break;
 			}
 
-			return result;
+			return result ;
 		}
 	}
-	return DefWindowProc(hwnd, message, wParam, lParam);
+	return DefWindowProc ( hwnd , message , wParam , lParam );
 }
 
-WNDCLASSEX simpleWinClass(HINSTANCE hThisInstance, HINSTANCE hPrev, const wchar_t *name, int ICON, int SMALL, COLORREF background) {
-	WNDCLASSEX result = { 0 };
+WNDCLASSEX simpleWinClass ( HINSTANCE hThisInstance , HINSTANCE hPrev , const char *name , int ICON , int SMALL , COLORREF background ) {
+	WNDCLASSEX result = { 0 } ;
 
 	HBRUSH hBrsh;
 
-	hBrsh = CreateSolidBrush(background);
+	hBrsh = CreateSolidBrush ( background );
 
 	/* The Window structure */
 	result.hInstance = hThisInstance;
 	result.lpszClassName = name;
 	result.lpfnWndProc = WindowProcedure;
 	result.style = CS_HREDRAW | CS_VREDRAW;
+
 	result.cbSize = sizeof(WNDCLASSEX);
 
 	if(ICON) result.hIcon = LoadIcon(hThisInstance, MAKEINTRESOURCE(ICON));
 	if(SMALL) result.hIconSm = LoadIcon(hThisInstance, MAKEINTRESOURCE(SMALL));
 	result.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	result.lpszMenuName = NULL;
+  
 	result.cbClsExtra = 0;
 	result.cbWndExtra = 0;
 

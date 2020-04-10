@@ -1,21 +1,35 @@
 #pragma once
 #include <math/hitable.h>
-#include <vector>
 
 /* Holds all the shapes in the scene. */
 class ShapeList {
 public:
-	ShapeList() = default;
-	ShapeList(std::vector<Hitable*>& objs) :
-		object_list(objs) {}
-	~ShapeList();
-
-	/* Add object to the scene. */
-	void add_object(Hitable* obj);
+	__device__ ShapeList() = default;
+	__device__ ShapeList(Hitable** objs, int count) :
+		object_list(objs), object_count(count) {}
+	__device__ ~ShapeList() = default;
 
 	/* Casts a ray and returns if it hit any object. */
-	bool cast_ray(const Ray& r, float t_min, float t_max, HitDesc& d);
+	__device__ bool cast_ray(const Ray& r, float t_min, float t_max, HitDesc& d)
+	{
+		HitDesc temp_d;
+		bool hit_object = false;
+		double closest_object_hit = t_max;
+
+		for (int i = 0; i < object_count; i++) {
+			Hitable* object = object_list[i];
+
+			if (object->hit(r, t_min, closest_object_hit, temp_d)) {
+				hit_object = true;
+				closest_object_hit = temp_d.t;
+				d = temp_d;
+			}
+		}
+
+		return hit_object;
+	}
 
 public:
-	std::vector<Hitable*> object_list;
+	Hitable** object_list;
+	int object_count = 0;
 };
